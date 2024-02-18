@@ -1,7 +1,7 @@
 import { Router } from "express"; 
 import { createWatchlist, deleteWatchlistById, getWatchlistById, updateWatchlist } from "../controllers/watchlist.controller.ts";
 
-const router = Router();
+const router: Router = Router();
 
 router.route("/watchlist/:id").get(getWatchlistById);
 router.route("/watchlist").post(createWatchlist);
