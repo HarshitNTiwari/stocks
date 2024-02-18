@@ -22,7 +22,7 @@ model Holding {
 model Watchlist {
   watchlistId String   @id @default(uuid())
   userId      String
-  name        String
+  name        String   @default("Untitled")
   stocks      String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
