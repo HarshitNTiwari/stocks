@@ -18,3 +18,60 @@ export const getWatchlistById: AsyncHandlerReturnValue = asyncHandler(async (req
         new ApiResponse(200, watchlist, "Watchlist retrieved successfully!")
     )
 })
+
+export const createWatchlist: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
+
+    const {userId, watchlistname, stocks} = req.body;
+    
+    const createdWatchlist = await prisma.watchlist.create({
+        data: {
+            userId: userId,
+            name: watchlistname,
+            stocks: stocks
+        }
+    })
+
+    if(!createdWatchlist) throw new ApiError(401, "Watchlist could not be created!")
+
+    return res.send(200).json(
+        new ApiResponse(200, createdWatchlist, "Watchlist created successfully!")
+    )
+}) 
+
+export const updateWatchlist: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
+    const watchlistId: string = req.params.id
+
+    const { stocks, watchlistname } = req.body;
+
+    const updatedWatchlist = await prisma.watchlist.update({
+        where: {
+            watchlistId: watchlistId
+        },
+        data: {
+            name: watchlistname,
+            stocks: stocks
+        }
+    })
+
+    if(!updatedWatchlist) throw new ApiError(401, "Watchlist could not be updated!")
+
+    return res.send(200).json(
+        new ApiResponse(200, updatedWatchlist, "Watchlist updated successfully!")
+    )
+})
+
+export const deleteWatchlistById: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
+    const watchlistId: string  = req.params.id
+
+    const deletedWatchlist = await prisma.watchlist.delete({
+        where: {
+            watchlistId: watchlistId
+        }
+    })
+
+    if(!deletedWatchlist) throw new ApiError(401, "Watchlist could not be deleted!")
+
+    return res.send(200).json(
+        new ApiResponse(200, deletedWatchlist, "Watchlist deleted successfully!")
+    )
+})
