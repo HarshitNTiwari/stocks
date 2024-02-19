@@ -13,7 +13,7 @@ export const getWatchlistById: AsyncHandlerReturnValue = asyncHandler(async (req
 
     if(!watchlist) throw new ApiError(401, "Watchlist not found!")
 
-    return res.send(200).json(
+    return res.status(200).json(
         new ApiResponse(200, watchlist, "Watchlist retrieved successfully!")
     )
 })
@@ -35,7 +35,7 @@ export const createWatchlist: AsyncHandlerReturnValue = asyncHandler(async (req:
 
     if(!createdWatchlist) throw new ApiError(401, "Watchlist could not be created!")
 
-    return res.send(200).json(
+    return res.status(200).json(
         new ApiResponse(200, createdWatchlist, "Watchlist created successfully!")
     )
 }) 
@@ -60,7 +60,7 @@ export const updateWatchlist: AsyncHandlerReturnValue = asyncHandler(async (req:
 
     if(!updatedWatchlist) throw new ApiError(401, "Watchlist could not be updated!")
 
-    return res.send(200).json(
+    return res.status(200).json(
         new ApiResponse(200, updatedWatchlist, "Watchlist updated successfully!")
     )
 })
@@ -76,7 +76,7 @@ export const deleteWatchlistById: AsyncHandlerReturnValue = asyncHandler(async (
 
     if(!deletedWatchlist) throw new ApiError(401, "Watchlist could not be deleted!")
 
-    return res.send(200).json(
+    return res.status(200).json(
         new ApiResponse(200, deletedWatchlist, "Watchlist deleted successfully!")
     )
 })
