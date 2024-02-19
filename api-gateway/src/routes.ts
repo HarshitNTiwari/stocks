@@ -1,17 +1,18 @@
-type Route = {
+const PORTFOLIO_MANAGER_SERVER = process.env.PORTFOLIO_MANAGER_SERVER;
+export type Route = {
     url: string;
     auth: boolean;
     rateLimit: {
         windowMs: number;
         max: number
     };
-    proxy: {
+    proxyOptions: {
         target: string,
         changeOrigin: boolean
     }
 }
 
-const routes: Route[] = [
+export const routes: Route[] = [
     {
         url: '/watchlist',
         auth: true,
@@ -19,8 +20,8 @@ const routes: Route[] = [
             windowMs: 15 * 60 * 1000, // 15 min
             max: 5 //max 5 requests in windowMs time
         },
-        proxy: {
-            target: "http://localhost:8000/api/v1/watchlist",
+        proxyOptions: {
+            target: `${PORTFOLIO_MANAGER_SERVER}/watchlist`,
             changeOrigin: true
         }
     },
@@ -31,8 +32,8 @@ const routes: Route[] = [
             windowMs: 15 * 60 * 1000, // 15 min
             max: 5
         },
-        proxy: {
-            target: "http://localhost:8000/api/v1/holding",
+        proxyOptions: {
+            target: `${PORTFOLIO_MANAGER_SERVER}/holding`,
             changeOrigin: true
         } 
     }
