@@ -93,5 +93,18 @@ export const registerUser: AsyncHandlerReturnValue = asyncHandler(async (req: Re
 })
 
 export const logoutUser: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
-    
+
+    await prisma.user.update({
+        where: {
+            id: req.user.id
+        },
+        data:{
+            refreshToken: null
+        }
+    })
+
+    return res.status(200)
+    .clearCookie("accessToken", cookieOptions)
+    .clearCookie("refreshToken", cookieOptions)
+    .json(new ApiResponse(200, {}, "User logged out successfully!"))
 })
