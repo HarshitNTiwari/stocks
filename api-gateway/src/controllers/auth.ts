@@ -33,7 +33,7 @@ export const loginUser: AsyncHandlerReturnValue = asyncHandler(async (req: Reque
     const isPasswordCorrect = checkPasswords(password, user.password);
     if(!isPasswordCorrect) throw new ApiError(401, "Invalid user credentials!");
 
-    const {accessToken, refreshToken}: {accessToken: string, refreshToken: string} = generateAccessAndRefreshTokens(user);
+    const {accessToken, refreshToken}: {accessToken: string, refreshToken: string} = await generateAccessAndRefreshTokens(user);
 
     const loggedInUser = await prisma.user.update({
         where: {
@@ -41,7 +41,8 @@ export const loginUser: AsyncHandlerReturnValue = asyncHandler(async (req: Reque
         },
         data: {
             refreshToken: refreshToken
-        }
+        },
+        select: selectOptions
     })
 
     return res.status(200)
@@ -79,7 +80,7 @@ export const registerUser: AsyncHandlerReturnValue = asyncHandler(async (req: Re
         data: {
             name: name,
             email: email,
-            password: hashPassword(password)
+            password: await hashPassword(password)
         }, 
         select: selectOptions
     })
