@@ -18,7 +18,7 @@ declare module "express-serve-static-core" {
 }
 
 export const checkLogin: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const accessToken = req.cookies?.accessToken;
+    const accessToken = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
 
     // if accessToken not present in cookies, then the user wasn't logged in 
     if(!accessToken) throw new ApiError(401, "Unauthorized request!")
