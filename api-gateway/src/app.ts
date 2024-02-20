@@ -1,11 +1,16 @@
 import express from "express";
-import { logger, apiProxy, rateLimiter } from "./middlewares/index.ts";
-import { routes } from "./routes.ts";
+import { logger, rateLimiter } from "./middlewares/index.ts";
+import apiRouter from "./routers/api.ts"
+import authRouter from "./routers/auth.ts"
 
 const app = express();
 
+// applying logger middleware  
 logger(app);
-apiProxy(app, routes);
+
 // rateLimiter(app, routes);
+
+app.use("/auth", authRouter);
+app.use("/api", apiRouter);
 
 export { app }
