@@ -7,8 +7,19 @@ interface JwtPayload {
     id: string;
 }
 
+declare module "express-serve-static-core" {
+    interface Request {
+        user: {
+            id: string 
+            name: string
+            email: string
+        }
+    }
+}
+
 export const checkLogin: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const accessToken = req.cookies?.accessToken;
+
     // if accessToken not present in cookies, then the user wasn't logged in 
     if(!accessToken) throw new ApiError(401, "Unauthorized request!")
 
@@ -23,6 +34,6 @@ export const checkLogin: AsyncHandlerReturnValue = asyncHandler(async (req: Requ
     if(!user) throw new ApiError(401, "Invalid access token!")
 
     req.user = user;
-
+    next();
 })
 
