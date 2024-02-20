@@ -1,7 +1,6 @@
 import express from "express";
 import { logger, rateLimiter } from "./middlewares/index.ts";
-import apiRouter from "./routers/api.ts"
-import authRouter from "./routers/auth.ts"
+import { apiRouter, authRouter } from "./routers/index.ts"
 
 const app = express();
 
