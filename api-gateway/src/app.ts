@@ -5,6 +5,12 @@ import authRouter from "./routers/auth.ts"
 
 const app = express();
 
+// built-in express middleware for json parsing. 
+// without it you won't be able to parse json data sent in req body
+app.use(express.json({
+    limit: "16kb"
+}))
+
 // applying logger middleware  
 logger(app);
 
