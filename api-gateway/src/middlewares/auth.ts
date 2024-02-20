@@ -17,6 +17,12 @@ declare module "express-serve-static-core" {
     }
 }
 
+const selectOptions = {
+    id: true,
+    email: true,
+    name: true
+}
+
 export const checkLogin: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const accessToken = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "");
 
@@ -28,7 +34,8 @@ export const checkLogin: AsyncHandlerReturnValue = asyncHandler(async (req: Requ
     const user = await prisma.user.findUnique({
         where: {
             id: decodedToken?.id
-        }
+        },
+        select: selectOptions
     })
 
     if(!user) throw new ApiError(401, "Invalid access token!")
