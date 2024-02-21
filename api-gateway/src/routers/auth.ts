@@ -1,7 +1,8 @@
 import { Router } from "express";
-import router from "./api";
 import { loginUser, registerUser, logoutUser }  from "../controllers/index"
 import { checkLogin } from "../middlewares/index"
+
+const router: Router = Router();
 
 router.route("/login").post(loginUser);
 router.route("/register").post(registerUser);
