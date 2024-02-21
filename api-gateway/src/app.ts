@@ -1,5 +1,8 @@
 import express from "express";
 import cookieParser from "cookie-parser"
+import { logger, rateLimiter } from "./middlewares/index";
+import { apiRouter, authRouter } from "./routers/index"
+import { checkLogin } from "./middlewares/index";
 
 const app = express();
 
@@ -18,11 +21,7 @@ logger(app);
 
 // rateLimiter(app, routes);
 
-
-import { logger, rateLimiter } from "./middlewares/index.ts";
-import { apiRouter, authRouter } from "./routers/index.ts"
-
 app.use("/auth", authRouter);
-app.use("/api", apiRouter);
+app.use("/api", checkLogin, apiRouter);
 
 export { app }

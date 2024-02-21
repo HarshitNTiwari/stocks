@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { apiProxy } from "../middlewares/index.ts";
-import { routes } from "../routes.ts";
+import { apiProxy } from "../middlewares/index";
+import { routes } from "../routes";
 
 const router: Router = Router();
 

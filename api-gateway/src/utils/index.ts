@@ -1,5 +1,5 @@
-import { asyncHandler, AsyncHandlerReturnValue } from "./asyncHandler.ts";
-import { ApiError } from "./ApiError.ts";
-import { ApiResponse } from "./ApiResponse.ts";
+import { asyncHandler, AsyncHandlerReturnValue } from "./asyncHandler";
+import { ApiError } from "./ApiError";
+import { ApiResponse } from "./ApiResponse";
 
 export { asyncHandler, ApiError, ApiResponse, AsyncHandlerReturnValue };

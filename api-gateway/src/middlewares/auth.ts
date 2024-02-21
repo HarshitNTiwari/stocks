@@ -1,7 +1,8 @@
-import prisma from "../config/db.ts";
+import prisma from "../config/db";
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { asyncHandler, ApiError, AsyncHandlerReturnValue } from "../utils/index.ts";
+import { asyncHandler, ApiError, AsyncHandlerReturnValue } from "../utils/index";
+
 
 interface JwtPayload {
     id: string;

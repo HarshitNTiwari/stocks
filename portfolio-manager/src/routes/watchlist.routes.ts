@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { createWatchlist, deleteWatchlistById, getWatchlistById, updateWatchlist } from "../controllers/watchlist.controller.ts";
+import { createWatchlist, deleteWatchlistById, getWatchlistById, updateWatchlist } from "../controllers/watchlist.controller";
 
 const router: Router = Router();
 

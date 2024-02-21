@@ -1,6 +1,6 @@
-import prisma from "../config/db.ts";
+import prisma from "../config/db";
 import { Request, Response } from "express";
-import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index.ts";
+import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index";
 
 
 export const getWatchlistById: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {

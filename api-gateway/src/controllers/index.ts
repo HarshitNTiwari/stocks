@@ -1,3 +1,3 @@
-import { loginUser, registerUser, logoutUser } from "./auth.ts";
+import { loginUser, registerUser, logoutUser } from "./auth";
 
 export { loginUser, registerUser, logoutUser }; 

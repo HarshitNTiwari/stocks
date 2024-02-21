@@ -1,4 +1,4 @@
-import apiRouter from "./api.ts"
-import authRouter from "./auth.ts"
+import apiRouter from "./api"
+import authRouter from "./auth"
 
 export { apiRouter, authRouter };

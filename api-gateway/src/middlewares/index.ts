@@ -1,6 +1,6 @@
-import { logger } from "./logging.ts";
-import { apiProxy } from "./proxy.ts";
-import { rateLimiter } from "./rateLimit.ts";
-import { checkLogin } from "./auth.ts"
+import { logger } from "./logging";
+import { apiProxy } from "./proxy";
+import { rateLimiter } from "./rateLimit";
+import { checkLogin } from "./auth"
 
 export { logger, apiProxy, rateLimiter, checkLogin }

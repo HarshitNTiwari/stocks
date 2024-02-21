@@ -1,6 +1,6 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { Router } from "express";
-import { Route } from "../index.types.ts";
+import { Route } from "../index.types";
 
 const apiProxy = (router: Router, routes: Route[]) => {
     routes.forEach(r => {

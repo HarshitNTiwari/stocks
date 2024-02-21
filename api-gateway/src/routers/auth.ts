@@ -1,7 +1,7 @@
 import { Router } from "express";
 import router from "./api";
-import { loginUser, registerUser, logoutUser }  from "../controllers/index.ts"
-import { checkLogin } from "../middlewares/index.ts"
+import { loginUser, registerUser, logoutUser }  from "../controllers/index"
+import { checkLogin } from "../middlewares/index"
 
 router.route("/login").post(loginUser);
 router.route("/register").post(registerUser);

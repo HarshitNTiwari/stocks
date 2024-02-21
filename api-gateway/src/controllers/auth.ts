@@ -1,8 +1,8 @@
-import prisma from "../config/db.ts";
+import prisma from "../config/db";
 import e, { Request, Response } from "express";
-import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index.ts";
-import { hashPassword, checkPasswords } from "../utils/auth.ts";
-import { generateAccessAndRefreshTokens } from "../utils/auth.ts";
+import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index";
+import { hashPassword, checkPasswords } from "../utils/auth";
+import { generateAccessAndRefreshTokens } from "../utils/auth";
 
 const selectOptions = {
     id: true,
