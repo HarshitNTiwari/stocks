@@ -32,7 +32,8 @@ model User {
 }
 
 model Holding {
-  isin           String  @id
+  id             String  @id @default(uuid())
+  isin           String
   trading_symbol String
   company_name   String
   exchange       String

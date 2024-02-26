@@ -1,13 +1,13 @@
-import prisma from "../config/db.ts";
+import prisma from "../config/db";
 import { Request, Response } from "express";
-import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index.ts";
+import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index";
 
 export const getHoldingById: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
     const holdingId: string = req.params.id;
 
     const holding = await prisma.holding.findUnique({
         where: {
-            tradingsymbol: holdingId
+            id: holdingId
         }
     })
 
