@@ -100,7 +100,7 @@ export const logoutUser: AsyncHandlerReturnValue = asyncHandler(async (req: Requ
 
     await prisma.user.update({
         where: {
-            id: req.user.id
+            id: req.body.user.id
         },
         data:{
             refreshToken: null

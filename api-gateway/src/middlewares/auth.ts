@@ -8,16 +8,6 @@ interface JwtPayload {
     id: string;
 }
 
-declare module "express-serve-static-core" {
-    interface Request {
-        user: {
-            id: string 
-            name: string
-            email: string
-        }
-    }
-}
-
 const selectOptions = {
     id: true,
     email: true,
@@ -41,7 +31,7 @@ export const checkLogin: AsyncHandlerReturnValue = asyncHandler(async (req: Requ
 
     if(!user) throw new ApiError(401, "Invalid access token!")
 
-    req.user = user;
+    req.body.user = user;
     next();
 })
 
