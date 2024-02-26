@@ -62,7 +62,7 @@ export const loginUser: AsyncHandlerReturnValue = asyncHandler(async (req: Reque
 })
 
 export const registerUser: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
-    const { name, email, password }: {name: string, email: string, password: string} = req.body;
+    const { name, email, password, demat_account, depository, depository_participant, is_active }: {name: string, email: string, password: string, demat_account: number, depository: string, depository_participant: string, is_active: boolean} = req.body;
 
     if([name, email, password].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required!")
@@ -80,7 +80,11 @@ export const registerUser: AsyncHandlerReturnValue = asyncHandler(async (req: Re
         data: {
             name: name,
             email: email,
-            password: await hashPassword(password)
+            password: await hashPassword(password),
+            demat_account: demat_account,
+            depository: depository,
+            depository_participant: depository_participant,
+            is_active: is_active
         }, 
         select: selectOptions
     })
