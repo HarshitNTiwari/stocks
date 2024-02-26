@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser"
 import { logger, rateLimiter } from "./middlewares/index";
 import { apiRouter, authRouter } from "./routers/index"
 import { checkLogin } from "./middlewares/index";
+import { routes } from "./routes";
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(cookieParser())
 // applying logger middleware  
 logger(app);
 
-// rateLimiter(app, routes);
+rateLimiter(app, routes);
 
 app.use("/auth", authRouter);
 app.use("/api", checkLogin, apiRouter);
