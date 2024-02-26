@@ -10,6 +10,7 @@ export const checkPasswords = async(password: string, hashedPassword: string) =>
 }
 
 const generateAccessToken = async(user: {id: string, email: string, name: string}) => {
+    console.log(`${process.env.ACCESS_TOKEN_EXPIRY}`)
     return jwt.sign(
         {
             id: user.id,
