@@ -1,6 +1,6 @@
-import prisma from "../config/db.ts";
+import prisma from "../config/db";
 import { Request, Response } from "express";
-import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index.ts";
+import { asyncHandler, AsyncHandlerReturnValue, ApiError, ApiResponse } from "../utils/index";
 
 
 export const getWatchlistById: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
@@ -19,15 +19,14 @@ export const getWatchlistById: AsyncHandlerReturnValue = asyncHandler(async (req
 })
 
 export const createWatchlist: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
-
-    const {userId, watchlistname, stocks}: {userId: string, watchlistname: string, stocks: string[]} = req.body;
+    const { watchlistname, stocks} : { watchlistname: string, stocks: string[]} = req.body;
     
     // stocks array shouldn't be empty
     if(stocks.length === 0) { throw new ApiError(401, "Atleast one stock needs to be added!!") }
 
     const createdWatchlist = await prisma.watchlist.create({
         data: {
-            userId: userId,
+            userId: req.body.user.id,
             name: watchlistname,
             stocks: stocks
         }

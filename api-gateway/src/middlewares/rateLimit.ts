@@ -1,6 +1,6 @@
 import { rateLimit } from "express-rate-limit";
 import { Express } from "express";
-import {Route} from "../index.types.ts"
+import {Route} from "../index.types"
 
 const rateLimiter = (app: Express, routes: Route[]) => {
     routes.forEach(r => {

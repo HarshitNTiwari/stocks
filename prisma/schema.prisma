@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                     String      @id @default(uuid())
+  name                   String
+  email                  String      @unique
+  password               String
+  demat_account          Int         @unique
+  depository             String
+  depository_participant String
+  is_active              Boolean
+  holdings               Holding[]
+  watchlists             Watchlist[]
+
+  refreshToken String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Holding {
+  id             String  @id @default(uuid())
+  isin           String
+  trading_symbol String
+  company_name   String
+  exchange       String
+  average_price  Decimal
+  quantity       Int
+  holder         User    @relation(fields: [holderId], references: [id])
+  holderId       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Watchlist {
+  watchlistId String   @id @default(uuid())
+  name        String   @default("Untitled")
+  stocks      String[]
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
