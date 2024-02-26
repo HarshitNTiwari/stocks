@@ -1,3 +1,5 @@
+import { Request, Response } from "express";
+import { fixRequestBody } from "http-proxy-middleware";
 const PORTFOLIO_MANAGER_SERVER = process.env.PORTFOLIO_MANAGER_SERVER;
 export type Route = {
     url: string;
@@ -6,9 +8,11 @@ export type Route = {
         windowMs: number;
         max: number
     };
-    proxyOptions: {
+    proxyOptions: { 
         target: string,
-        changeOrigin: boolean
+        pathRewrite: {}
+        changeOrigin: boolean,
+        onProxyReq: (proxyReq: any, req: Request, res: Response) => void
     }
 }
 
@@ -21,8 +25,10 @@ export const routes: Route[] = [
             max: 5 //max 5 requests in windowMs time
         },
         proxyOptions: {
-            target: `${PORTFOLIO_MANAGER_SERVER}/watchlist`,
-            changeOrigin: true
+            target: `${PORTFOLIO_MANAGER_SERVER}/watchlist/watchlist`,
+            pathRewrite: { '/api/watchlist': '' },
+            changeOrigin: true,
+            onProxyReq: fixRequestBody
         }
     },
     {
@@ -32,9 +38,11 @@ export const routes: Route[] = [
             windowMs: 15 * 60 * 1000, // 15 min
             max: 5
         },
-        proxyOptions: {
-            target: `${PORTFOLIO_MANAGER_SERVER}/holding`,
-            changeOrigin: true
+        proxyOptions: {   
+            target: `${PORTFOLIO_MANAGER_SERVER}/holding`,   
+            pathRewrite: { '/api/holding': '' },
+            changeOrigin: true,
+            onProxyReq: fixRequestBody
         } 
     }
 ]
