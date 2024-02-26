@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
 import { fixRequestBody } from "http-proxy-middleware";
+import dotenv from "dotenv";
+dotenv.config({
+    path: '.env'
+})
 const PORTFOLIO_MANAGER_SERVER = process.env.PORTFOLIO_MANAGER_SERVER;
 export type Route = {
     url: string;
