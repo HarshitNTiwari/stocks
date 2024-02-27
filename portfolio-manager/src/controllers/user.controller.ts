@@ -9,7 +9,8 @@ const selectOptions = {
     demat_account: true,
     depository: true,
     depository_participant: true,
-    is_active: true
+    is_active: true,
+    watchlists: true
 }
 
 export const getUserDetails: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
