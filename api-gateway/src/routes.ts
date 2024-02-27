@@ -22,6 +22,20 @@ export type Route = {
 
 export const routes: Route[] = [
     {
+        url: '/user',
+        auth: true,
+        rateLimit: {
+            windowMs: 15 * 60 * 1000, // 15 min
+            max: 5 //max 5 requests in windowMs time
+        },
+        proxyOptions: {
+            target: `${PORTFOLIO_MANAGER_SERVER}/user/user`,
+            pathRewrite: { '/api/user': '' },
+            changeOrigin: true,
+            onProxyReq: fixRequestBody
+        }
+    },
+    {
         url: '/watchlist',
         auth: true,
         rateLimit: {
