@@ -17,3 +17,18 @@ export const getHoldingById: AsyncHandlerReturnValue = asyncHandler(async (req: 
         new ApiResponse(200, holding, "Holding found successfully!")
     )
 })
+
+export const getHoldingsByUser: AsyncHandlerReturnValue = asyncHandler(async(req: Request, res: Response) => {
+    const userId = req.body.user.id;
+    const holdings = await prisma.holding.findMany({
+        where: {
+            holderId: userId
+        }
+    })
+
+    if(!holdings) throw new ApiError(401, "Holdings not found!");
+
+    return res.status(200).json(
+        new ApiResponse(200, holdings, "Holdings found successfully!")
+    )
+})
