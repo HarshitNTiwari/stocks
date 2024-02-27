@@ -39,6 +39,22 @@ export const createWatchlist: AsyncHandlerReturnValue = asyncHandler(async (req:
     )
 }) 
 
+export const getWatchlistsByUser: AsyncHandlerReturnValue = asyncHandler(async(req: Request, res: Response) => {
+    console.log("Inside here")
+    const userId: string = req.body.user.id;
+    const watchlists = await prisma.watchlist.findMany({
+        where: {
+            userId: userId
+        }
+    })
+
+    if(!watchlists) throw new ApiError(401, "Watchlists not found!")
+
+    return res.status(200).json(
+        new ApiResponse(200, watchlists, "Watchlists retrieved successfully!")
+    )
+})
+
 export const updateWatchlist: AsyncHandlerReturnValue = asyncHandler(async (req: Request, res: Response) => {
     const watchlistId: string = req.params.id
 
